@@ -20,22 +20,21 @@ pypoll_df = pd.read_csv(pypoll_csv)
 # In[3]:
 
 
-# Add variables and lists
-#total_votes =
+print('Election Results')
 
 
 # In[4]:
 
 
-print('Election Results')
+print('****************************')
 
 
 # In[5]:
 
 
-#file = open('pypoll_output.txt', 'a')
-#file.write('Election Results'+'\n')
-#file.close()
+# Finding total votes
+total_votes = pypoll_df["Candidate"].count()
+print("Total Votes: "+f"{total_votes}")
 
 
 # In[6]:
@@ -47,49 +46,19 @@ print('****************************')
 # In[7]:
 
 
-#file = open('pypoll_output.txt', 'a')
-#file.write('****************************'+'\n')
-#file.close()
-
-
-# In[8]:
-
-
-# Finding total votes
-total_votes = pypoll_df["Candidate"].count()
-print("Total Votes: "+f"{total_votes}")
-
-
-# In[9]:
-
-
-print('****************************')
-
-
-# In[10]:
-
-
-#file = open('pypoll_output.txt', 'a')
-#file.write('****************************'+'\n')
-#file.close()
-
-
-# In[11]:
-
-
 # making new DataFrame to keep original data intact
 pypoll_2_df = pypoll_df
 #
 
 
-# In[12]:
+# In[8]:
 
 
 # Setting Candidate column as index for use as a key
 pypoll_2_df = pypoll_2_df.set_index('Candidate')
 
 
-# In[13]:
+# In[9]:
 
 
 # Create Candidate DataFrames
@@ -99,7 +68,7 @@ Li_df = pypoll_2_df[pypoll_2_df.index == "Li"]
 O_Tooley_df = pypoll_2_df[pypoll_2_df.index == "O'Tooley"]
 
 
-# In[14]:
+# In[10]:
 
 
 # Find number of votes cast per candidate
@@ -109,7 +78,7 @@ Li_count = Li_df["County"].count()
 O_Tooley_count = O_Tooley_df["County"].count()
 
 
-# In[15]:
+# In[11]:
 
 
 # Find percentage of votes cast per candidate
@@ -119,7 +88,7 @@ li_prct = Li_count / total_votes * 100
 o_tooley_prct = O_Tooley_count / total_votes * 100
 
 
-# In[16]:
+# In[12]:
 
 
 # Printing results
@@ -129,21 +98,13 @@ print(f'Li: {"%.3f" % li_prct}% ({Li_count})')
 print("O'"+f'Tooley: {"%.3f" % o_tooley_prct}% ({O_Tooley_count})')
 
 
-# In[17]:
+# In[13]:
 
 
 print('****************************')
 
 
-# In[18]:
-
-
-#file = open('pypoll_output.txt', 'a')
-#file.write('****************************'+'\n')
-#file.close()
-
-
-# In[19]:
+# In[14]:
 
 
 #Finding the Winner
@@ -161,21 +122,13 @@ else:
     print(f"Winner: {winner}")
 
 
-# In[20]:
+# In[15]:
 
 
 print('****************************')
 
 
-# In[21]:
-
-
-#file = open('pypoll_output.txt', 'a')
-#file.write('****************************'+'\n')
-#file.close()
-
-
-# In[22]:
+# In[16]:
 
 
 # Writing output to text
