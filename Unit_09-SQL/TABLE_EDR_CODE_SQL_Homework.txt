@@ -1,0 +1,46 @@
+#Donald Stegman
+#https://app.quickdatabasediagrams.com/#/
+
+departments
+-
+dept_no INT PK
+dept_name VARCHAR(25)
+
+
+dept_emp
+-
+dept_no INT FK >- departments.dept_no
+emp_no INT FK >- employees.emp_no
+from_date DATE()
+to_date DATE()
+
+dept_man
+-
+dept_no INT FK >- departments.dept_no
+emp_no INT FK >- employees.emp_no
+from_date DATE()
+to_date DATE()
+
+
+employees
+-
+emp_no INT PK
+birth_date DATE
+first_name VARCHAR(100)
+last_name VARCHAR(100)
+gender VARCHAR(10)
+hire_date DATE()
+
+salaries
+-
+emp_no INT() FK >- employees.emp_no
+salary BIGINT()
+from_date DATE()
+to_date DATE()
+
+titles
+-
+emp_no INT FK >- employees.emp_no
+title VARCHAR()
+from_date DATE()
+to_date DATE()
