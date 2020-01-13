@@ -1,6 +1,12 @@
+h1 {
+    color: whitesmoke;
+    background: rgb(0, 0, 37);
+}
+
 body {
     padding: 0;
     margin: 0;
+    background: rgb(0, 0, 37);
 }
 
 #map,
