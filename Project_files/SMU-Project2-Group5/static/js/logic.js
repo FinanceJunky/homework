@@ -1,15 +1,82 @@
-// Creating map object
-var myMap = L.map("map", {
-    center: [0, 110],
-    zoom: 5
-});
-
-// Adding tile layer
-L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+// Define streetmap and darkmap layers
+var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
     attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
     maxZoom: 18,
     id: "mapbox.streets",
     accessToken: API_KEY
+});
+
+var darkmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.dark",
+    accessToken: API_KEY
+});
+
+var graymap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery © <a href='https://www.mapbox.com/'>Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.light",
+    accessToken: API_KEY
+});
+
+var satellitemap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery © <a href='https://www.mapbox.com/'>Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.streets-satellite",
+    accessToken: API_KEY
+});
+
+var outdoors = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+    attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery © <a href='https://www.mapbox.com/'>Mapbox</a>",
+    maxZoom: 18,
+    id: "mapbox.outdoors",
+    accessToken: API_KEY
+});
+
+// Define a baseMaps object to hold our base layers
+var baseMaps = {
+    "Satellite": satellitemap,
+    "Dark Map": darkmap,
+    "Gray Map": graymap,
+    "Street Map": streetmap,
+    "Outdoors": outdoors
+};
+
+// Initialize all of the LayerGroups we'll be using
+var layers = {
+    LAYER_PONGO_PYGMAEUS: new L.LayerGroup(),
+    LAYER_PONGO_ABELII: new L.LayerGroup(),
+    LAYER_PONGO_TAPANULIENSIS: new L.LayerGroup(),
+    LAYER_MARKER: new L.LayerGroup(),
+};
+
+// Creating map object
+var myMap = L.map("map", {
+    center: [0, 110],
+    zoom: 5,
+    layers: [
+        layers.LAYER_PONGO_PYGMAEUS,
+        layers.LAYER_PONGO_ABELII,
+        layers.LAYER_PONGO_TAPANULIENSIS,
+        layers.LAYER_MARKER
+    ]
+});
+
+// Add our 'streetmap' tile layer to the map
+satellitemap.addTo(myMap);
+
+// Create an overlays object to add to the layer control
+var overlays = {
+    "Boronean Orangutan": layers.LAYER_PONGO_PYGMAEUS,
+    "Sumatrun Orangutan": layers.LAYER_PONGO_ABELII,
+    "Tanapulien Orangutan": layers.LAYER_PONGO_TAPANULIENSIS,
+    "Palm Oil Mills": layers.LAYER_MARKER,
+};
+
+// Create a control for our layers, add our overlay layers to it
+L.control.layers(baseMaps, overlays, {
+    collapsed: false
 }).addTo(myMap);
 
 // Load in geojson data
@@ -130,22 +197,6 @@ L.circle([5, 110], {
     radius: 100000
 }).addTo(myMap);
 /////////////////////////////////////////////////////////////////////////////////////
-
-// var newtry = "https://opendata.arcgis.com/datasets/5c026d553ff049a585b90c3b1d53d4f5_34.geojson?";
-
-// d3.json(newtry, function(response) {
-
-//     console.log(response);
-
-//     for (var i = 0; i < response.length; i++) {
-//         var location = response[i].location;
-
-//         if (location) {
-//             L.marker([location.coordinates[1], location.coordinates[0]]).addTo(myMap);
-//         }
-//     }
-
-// });
 
 //This code works yeah
 
