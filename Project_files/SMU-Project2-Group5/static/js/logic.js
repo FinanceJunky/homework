@@ -59,7 +59,7 @@ var myMap = L.map("map", {
         layers.LAYER_PONGO_PYGMAEUS,
         layers.LAYER_PONGO_ABELII,
         layers.LAYER_PONGO_TAPANULIENSIS,
-        layers.LAYER_MARKER
+        // layers.LAYER_MARKER
     ]
 });
 
@@ -101,7 +101,7 @@ d3.json(geoData_Pongo_pygmaeus, function(data) {
         //     layer.bindPopup("Zip Code: " + feature.properties.ZIP + "<br>Median Household Income:<br>" +
         //         "$" + feature.properties.MHI2016);
         // }
-    }).addTo(myMap);
+    }).addTo(layers.LAYER_PONGO_PYGMAEUS);
 
 });
 
@@ -128,7 +128,7 @@ d3.json(geoData_Pongo_abelii, function(data3) {
         //     layer.bindPopup("Zip Code: " + feature.properties.ZIP + "<br>Median Household Income:<br>" +
         //         "$" + feature.properties.MHI2016);
         // }
-    }).addTo(myMap);
+    }).addTo(layers.LAYER_PONGO_ABELII);
 
 });
 
@@ -155,7 +155,7 @@ d3.json(geoData_Pongo_tapanuliensis, function(data2) {
         //     layer.bindPopup("Zip Code: " + feature.properties.ZIP + "<br>Median Household Income:<br>" +
         //         "$" + feature.properties.MHI2016);
         // }
-    }).addTo(myMap);
+    }).addTo(layers.LAYER_PONGO_TAPANULIENSIS);
 
 });
 
@@ -189,13 +189,6 @@ legend.onAdd = function() {
 // Finally, we our legend to the map.
 legend.addTo(myMap);
 
-// Create a red circle over Dallas
-L.circle([5, 110], {
-    color: "red",
-    fillColor: "red",
-    fillOpacity: 0.75,
-    radius: 100000
-}).addTo(myMap);
 /////////////////////////////////////////////////////////////////////////////////////
 
 //This code works yeah
@@ -207,68 +200,13 @@ d3.json(newtry2, function(response) {
     for (var i = 0; i < response.features.length; i++) {
         var location = response.features[i].properties;
         if (location) {
-            L.marker([location.latitude, location.longitude]).addTo(myMap);
-        }
+            var newMarker = L.marker([location.latitude, location.longitude]);
+        };
+        // Add the new marker to the appropriate layer
+        newMarker.addTo(layers.LAYER_MARKER);
+        // Bind a popup to the marker that will  display on click. This will be rendered as HTML
+        newMarker.bindPopup("Mill Name: " + location.mill_name + "<br> Location Certified Using Sustainable <br> Practices: " + location.cert + "<br>");
     }
 });
 
-//end alexander--------------------------------------------------------------------
-
-// Perform a GET request to the query URL
-
-// d3.json(newtry2, function(data9) {
-//     // Once we get a response, send the data.features object to the createFeatures function
-//     createFeatures(data9.features);
-// });
-
-// function createFeatures(earthquakeData) {
-
-// Define a function we want to run once for each feature in the features array
-// Give each feature a popup describing the place and time of the earthquake
-// function onEachFeature(feature, layer) {
-//     layer.bindPopup("<h3>" + feature.properties.mill_name +
-//         "</h3><hr><p>" + feature.properties.cert + "</p>"
-//         // + "<hr><p>Magnitude: " + feature.properties.mag + "</p>"
-//     );
-// }
-
-//marker options
-// var geojsonMarkerOptions = {
-//     radius: 10000,
-//     fillColor: "#ff7800",
-//     color: "#000",
-//     weight: 1,
-//     opacity: 1,
-//     fillOpacity: 0.8
-// };
-
-// Create a GeoJSON layer containing the features array on the earthquakeData object
-// Run the onEachFeature function once for each piece of data in the array
-
-// var earthquakes = L.geoJSON(earthquakeData, {
-//     onEachFeature: onEachFeature,
-//     pointToLayer: function(feature, latlng) {
-//         return L.circleMarker(latlng, geojsonMarkerOptions);
-//         console.log(earthquakes)
-//     },
-//     style: function(feature) {
-//         var mag = { color: "blue", fillColor: "blue", radius: 2 };
-//         if (mag >= 5.0) {
-//             return { color: "firebrick", fillColor: "firebrick", radius: 18 };
-//         } else if (mag >= 4.0) {
-//             return { color: "red", fillColor: "red", radius: 14 };
-//         } else if (mag >= 3.0) {
-//             return { color: "orange", fillColor: "orange", radius: 11 };
-//         } else if (mag >= 2.0) {
-//             return { color: "yellow", fillColor: "yellow", radius: 8 };
-//         } else if (mag >= 1.0) {
-//             return { color: "green", fillColor: "green", radius: 5 };
-//         } else {
-//             return { color: "blue", fillColor: "blue", radius: 2 };
-//         }
-//     },
-// });
-
-// Sending our earthquakes layer to the createMap function
-// createMap(earthquakes);
-// };
+//end --------------------------------------------------------------------
