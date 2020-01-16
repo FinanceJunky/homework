@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script src="static/js/app.js"></script>
+    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Analytics</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">ANALYTICS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample01"
+            aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/about">About Us <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Analytics</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="/markers">Map Markers</a>
+                        <a class="dropdown-item" href="/line">Line Chart</a>
+                        <a class="dropdown-item" href="/analytics">Bar Chart</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <div class="text-center">
+        <script>
+            let myChart = document.getElementById('myChart').getContext('2d');
+
+            // Global Options
+            Chart.defaults.global.defaultFontFamily = 'Lato';
+            Chart.defaults.global.defaultFontSize = 18;
+            Chart.defaults.global.defaultFontColor = '#777';
+
+            let massPopChart = new Chart(myChart, {
+                type: 'bar',
+                data: {
+                    labels: ['PKS Sukajadi Sawit Mekar 1', 'Sungai Purun POM', 'PKS Sukajadi Sawit Mekar 2', 'PT MAJU ANEKA SAWIT & GAP POM', 'PT Mustika Sembuluh POM', 'Terawan Mill'],
+                    datasets: [{
+                        label: 'Carbon Radius of Mills',
+                        data: [
+                            248512.945,
+                            239663.64,
+                            237471.135,
+                            232990.355,
+                            228441.28,
+                            215882.065
+                        ],
+                        //backgroundColor:'green',
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.6)',
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 206, 86, 0.6)',
+                            'rgba(128, 0, 128, 0.6)',
+                            'rgba(255, 105, 180, 0.6)',
+                            'rgba(255, 159, 64, 0.6)',
+                            'rgba(255, 99, 132, 0.6)'
+                        ],
+                        borderWidth: 1,
+                        borderColor: '#777',
+                        hoverBorderWidth: 3,
+                        hoverBorderColor: '#000'
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: 'Carbon Radius',
+                        fontSize: 25
+                    },
+                    legend: {
+                        display: false,
+                        position: 'right',
+                        labels: {
+                            fontColor: '#000'
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            left: 50,
+                            right: 0,
+                            bottom: 0,
+                            top: 0
+                        }
+                    },
+                    tooltips: {
+                        enabled: true
+                    }
+                }
+            });
+        </script>
+    </div>
+
+
+    <script>
+        let myLineChart = document.getElementById('myLineChart').getContext('2d');
+
+        // Global Options
+        Chart.defaults.global.defaultFontFamily = 'Lato';
+        Chart.defaults.global.defaultFontSize = 18;
+        Chart.defaults.global.defaultFontColor = '#777';
+
+        let massPopChart = new Chart(myLineChart, {
+            type: 'line',
+            data: {
+                labels: ['PT Inti Indosawit Subur', 'PT Musim Mas', 'PT Salim Ivomas Pratama Tbk', 'Wilmar International Ltd', 'PT Perkebunan Nusantara IV (PERSERO)', 'PT Inti Indosawit Subur'],
+                datasets: [{
+                    label: 'Carbon Radius of Parent Company',
+                    data: [
+                        177220.815,
+                        203201.175,
+                        195088.2,
+                        146270.62,
+                        22743.02,
+                        177210.61
+                    ],
+                    //backgroundColor:'green',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(105, 0, 128, 0.6)',
+                        'rgba(255, 105, 180, 0.6)',
+                        'rgba(200, 100, 64, 0.6)',
+                        'rgba(140, 80, 132, 0.6)'
+                    ],
+                    borderWidth: 1,
+                    borderColor: '#777',
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000'
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Carbon Radius',
+                    fontSize: 25
+                },
+                legend: {
+                    display: false,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#000'
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+                tooltips: {
+                    enabled: true
+                }
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+
+<script src="static/js/app.js"></script>
+</body>
+
+</html>
