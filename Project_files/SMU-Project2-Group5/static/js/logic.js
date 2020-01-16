@@ -70,7 +70,7 @@ satellitemap.addTo(myMap);
 var overlays = {
     "Boronean Orangutan": layers.LAYER_PONGO_PYGMAEUS,
     "Sumatrun Orangutan": layers.LAYER_PONGO_ABELII,
-    "Tanapulien Orangutan": layers.LAYER_PONGO_TAPANULIENSIS,
+    "Tanapuli Orangutan": layers.LAYER_PONGO_TAPANULIENSIS,
     "Palm Oil Mills": layers.LAYER_MARKER,
 };
 
